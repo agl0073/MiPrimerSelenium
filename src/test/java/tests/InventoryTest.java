@@ -82,4 +82,27 @@ public class InventoryTest {
         assertTrue(inventoryPage.botonRemoveAparece(producto), "El botón de Remove no aparece");
         assertEquals("Remove", inventoryPage.getTextoBotonProducto(producto), "El texto del botón no cambió a Remove");
     }
+
+    @Test
+    public void eliminarProductoDelCarrito() throws InterruptedException {
+        // inicia sesión correctamente
+        loginPage.login("standard_user", "secret_sauce");
+        Thread.sleep(1000);
+
+        String producto = "sauce-labs-backpack";
+        
+        // añade un producto al carrito
+        inventoryPage.anadirProducto(producto);
+        Thread.sleep(1000);
+
+        // comprueba que el contador muestra 1
+        assertEquals(1, inventoryPage.getNumeroProductosCarrito(), "El carrito debería tener 1 producto");
+
+        // elimina el producto del carrito
+        inventoryPage.removerProducto(producto);
+        Thread.sleep(1000);
+
+        // comprueba que el carrito está vacío (el contador no se muestra)
+        assertEquals(0, inventoryPage.getNumeroProductosCarrito(), "El carrito debería estar vacío");
+    }
 }

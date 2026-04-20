@@ -61,4 +61,12 @@ public class InventoryPage {
             return driver.findElement(By.id("add-to-cart-" + productNameId)).getText();
         }
     }
+
+    /**
+     * Elimina un producto del carrito.
+     */
+    public void removerProducto(String productNameId) {
+        By removeBtn = By.id("remove-" + productNameId);
+        driver.findElement(removeBtn).click();
+    }
 }
